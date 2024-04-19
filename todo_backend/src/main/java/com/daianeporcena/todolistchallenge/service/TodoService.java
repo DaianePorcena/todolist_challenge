@@ -18,6 +18,7 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
 
+    // Filtra todas as tarefas, mas precisa ser revisado.
     public List<Todo> list(){
         Sort sort = Sort.by("id").descending();
         return todoRepository.findAll(sort);
@@ -29,21 +30,27 @@ public class TodoService {
         return list();
     }
 
-    
-    public List<Todo> update(Long id, Todo updatedTodo){ // Corrija a assinatura do método para incluir o parâmetro 'id'
-    Optional<Todo> optionalTodo = todoRepository.findById(id); // Adicione o parâmetro 'id' ao método 'findById'
-    if (optionalTodo.isPresent()) {
-        Todo todoToUpdate = optionalTodo.get(); // Renomeie a variável para evitar conflito de nomes
-        todoToUpdate.setTitle(updatedTodo.getTitle());
-        todoToUpdate.setDescription(updatedTodo.getDescription());
-        todoToUpdate.setStatus(updatedTodo.getStatus());
-        todoRepository.save(todoToUpdate); // Use a instância atualizada da tarefa
+    // Endpoint para  atualizar as tarefas pelo id. Precisa realizar alguna ajustes.
+    public List<Todo> update(Long id, Todo updatedTodo){  
+        Optional<Todo> optionalTodo = todoRepository.findById(id); 
+        if (optionalTodo.isPresent()) {
+            Todo todoToUpdate = optionalTodo.get(); 
+            todoToUpdate.setTitle(updatedTodo.getTitle());
+            todoToUpdate.setDescription(updatedTodo.getDescription());
+            todoToUpdate.setStatus(updatedTodo.getStatus());
+            todoRepository.save(todoToUpdate); 
+        }
+        return list();
     }
-    return list();
-}
 
     public List<Todo> delete(Long id){
         todoRepository.deleteById(id);
         return list();
     }
+
+    // Endpoint para filtrar as tarefas pelo id
+    public Optional<Todo> findById(Long id) {
+        return todoRepository.findById(id);
+    }
+
 }
