@@ -27,6 +27,7 @@ Aplicação de lista de tarefas desenvolvida como parte da prova de validação 
 - Java 21
 - Spring Framework 3.2.4
 - Apache Maven 3.9.6 
+- MysQL
 
 
 ## 🛠️ Instalação
