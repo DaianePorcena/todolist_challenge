@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #2C2A2A;
+
+}
+
+.home{
+    background: linear-gradient(0deg, rgba(115,0,185,1) 0%, rgba(215,170,251,1) 100%);
+    width: 100vw;
+    height: 100%;
+    padding: 70px 78px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.logo h2{
+    color: #fff;
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.container{
+    position: relative;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    padding: 70px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid red;
+    border-radius: 10px;
+
+}
+
+.addTask{
+    background: #D7AAFB;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    align-self: flex-end;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+   
+}
