@@ -91,3 +91,26 @@ h3{
     background: #d4d4d4;
 }
 
+/* Media Queries */
+
+@media screen and (max-width: 768px) {
+   h3{
+    font-size: 20px;
+   }
+
+   .form{
+    gap: 20px;
+   }
+
+   .taskTitle input,
+    .taskDescription textarea,
+    .taskStatus select{
+        height: 25px;
+        font-size: 14px;
+    }
+
+    .submit{
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
