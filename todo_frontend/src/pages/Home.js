@@ -8,7 +8,8 @@ import './Home.css';
 const Home = () => {
     const [todos, setTodos] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [selectedTodo, setSelectedTodo] = useState(null);
+    
     useEffect(() => {
         fetchTodos();
     }, []);
@@ -24,7 +25,8 @@ const Home = () => {
     };
 
     const handleEdit = (todo) => {
-        console.log('Edit todo:', todo);
+        setSelectedTodo(todo);
+        setIsModalOpen(true);
     };
 
     const handleDelete = (id) => {
@@ -72,7 +74,7 @@ const Home = () => {
                 {isModalOpen && <div className="modal">
                     <div className="modal-content">
                         {/* <span className="close" onClick={closeModal}>&times;</span> */}
-                        <AddTask onAdd={closeModal} onCancel={closeModal}/>
+                        <AddTask onAdd={closeModal} onCancel={closeModal} selectedTodo={selectedTodo}/>
                     </div>
 
                     
