@@ -1,7 +1,9 @@
 package com.daianeporcena.todolistchallenge.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,9 +36,22 @@ public class TodoController {
         return todoService.list();
     }
 
+    // Método Get para mapear as tarefas por meio de um único id
+    @GetMapping("/{id}")
+    public ResponseEntity<Todo> getTaskById(@PathVariable Long id) {
+        Optional<Todo> optionalTodo = todoService.findById(id);
+        if (optionalTodo.isPresent()) {
+            Todo todo = optionalTodo.get();
+            return ResponseEntity.ok(todo);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
     @PutMapping("/{id}") 
     public List<Todo> update(@PathVariable Long id, @RequestBody Todo updatedTodo) {
-        return todoService.update(id, updatedTodo); // Passe o id e a tarefa atualizada para o serviço
+        return todoService.update(id, updatedTodo); 
     }
 
     @DeleteMapping("/{id}")
