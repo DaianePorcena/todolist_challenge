@@ -9,7 +9,8 @@ const Home = () => {
     const [todos, setTodos] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTodo, setSelectedTodo] = useState(null);
-    
+    const [statusFilter, setStatusFilter] = useState('');
+
     useEffect(() => {
         fetchTodos();
     }, []);
@@ -50,6 +51,12 @@ const Home = () => {
         fetchTodos(); // Atualiza a lista de tarefas após fechar o modal
     };
 
+    const handleStatusFilterChange = (status) => {
+        setStatusFilter(status);
+    };
+
+    const filteredTodos = statusFilter ? todos.filter(todo => todo.status === statusFilter) : todos;
+
     return (
         <div className='home'>
             <div className='logo'>
@@ -58,7 +65,14 @@ const Home = () => {
             </div>
             
             <div className='container'>
-                {todos.map(todo => (
+                <div className="filter-buttons">
+                <button className={statusFilter === '' ? 'selected' : ''} onClick={() => handleStatusFilterChange('')}>TODOS</button>
+                    <button className={statusFilter === 'NAO_INICIADO' ? 'selected' : ''} onClick={() => handleStatusFilterChange('NAO_INICIADO')}>NAO_INICIADO</button>
+                    <button className={statusFilter === 'EM_ANDAMENTO' ? 'selected' : ''} onClick={() => handleStatusFilterChange('EM_ANDAMENTO')}>EM_ANDAMENTO</button>
+                    <button className={statusFilter === 'CONCLUIDO' ? 'selected' : ''} onClick={() => handleStatusFilterChange('CONCLUIDO')}>CONCLUÍDO</button>
+                </div>
+
+                {filteredTodos.map(todo => (
                     <TodoItem
                         key={todo.id}
                         todo={todo}
@@ -73,11 +87,8 @@ const Home = () => {
 
                 {isModalOpen && <div className="modal">
                     <div className="modal-content">
-                        {/* <span className="close" onClick={closeModal}>&times;</span> */}
                         <AddTask onAdd={closeModal} onCancel={closeModal} selectedTodo={selectedTodo}/>
                     </div>
-
-                    
                 </div>}
             </div>
         </div>
